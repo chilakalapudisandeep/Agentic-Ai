@@ -4,7 +4,7 @@ import { LogOut, Copy, Send, Bot, Check, LayoutDashboard, Brain, Globe, Code, Fi
 import ThinkingLoader from './ThinkingLoader';
 import StreamingMarkdown from './StreamingMarkdown';
 import './Dashboard.css';
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const API_URL = import.meta.env.VITE_API_URL || "https://agentic-ai-1-f6cz.onrender.com/";
 const Dashboard = ({ user, onLogout }) => {
   const [task, setTask] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);

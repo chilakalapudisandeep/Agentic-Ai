@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 
 // ✅ Use environment variable (fallback to your Render backend)
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const BASE_URL = import.meta.env.VITE_API_URL || "https://agentic-ai-1-f6cz.onrender.com/"
 
 const Login = ({ onLogin }) => {
   const [isSignUp, setIsSignUp] = useState(false);
