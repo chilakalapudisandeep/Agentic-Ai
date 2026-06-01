@@ -35,7 +35,14 @@ const Login = ({ onLogin }) => {
         body: JSON.stringify({ username, password })
       });
 
-      const data = await response.json();
+      const text = await response.text();
+      let data = {};
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (err) {
+        console.error("Raw response (not JSON):", text);
+        throw new Error(`Invalid response format from server (Status ${response.status})`);
+      }
 
       if (response.ok) {
         if (isSignUp) {

@@ -39,9 +39,10 @@ const Dashboard = ({ user, onLogout }) => {
       try {
         const res = await fetch(`${API_URL}/api/history/${user.username}`);
         if (res.ok) {
-          const data = await res.json();
+          const text = await res.text();
+          const data = text ? JSON.parse(text) : { history: [] };
           // The API returns it sorted newest first (timestamp DESC). We want oldest first for display flow.
-          setChatHistory(data.history.reverse());
+          setChatHistory((data.history || []).reverse());
         }
       } catch (err) {
         console.error("Failed to load history", err);
@@ -70,7 +71,14 @@ const Dashboard = ({ user, onLogout }) => {
         body: JSON.stringify({ task, username: user.username })
       });
 
-      const data = await response.json();
+      const text = await response.text();
+      let data = {};
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (err) {
+        console.error("Raw response (not JSON):", text);
+        throw new Error(`Invalid response format from server (Status ${response.status})`);
+      }
 
       if (response.ok) {
         setResult(data);
@@ -82,7 +90,7 @@ const Dashboard = ({ user, onLogout }) => {
           prompt: task,
           title: task.length > 30 ? task.substring(0, 30) + '...' : task,
           response: data.final_answer,
-          agent: data.agents.join(", "),
+          agent: (data.agents || []).join(", "),
           timestamp: new Date().toISOString(),
           is_pinned: false,
           is_favorite: false
