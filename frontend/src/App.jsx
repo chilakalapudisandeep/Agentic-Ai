@@ -11,7 +11,13 @@ function App() {
   
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem('user');
-    return savedUser ? JSON.parse(savedUser) : null;
+    if (!savedUser || savedUser === 'undefined') return null;
+    try {
+      return JSON.parse(savedUser);
+    } catch (e) {
+      localStorage.removeItem('user');
+      return null;
+    }
   });
 
   const handleLogin = (userData) => {
