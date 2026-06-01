@@ -3,8 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { LogOut, Copy, Send, Bot, Check, LayoutDashboard, Brain, Globe, Code, FileText, Trash2, Search, Pin, Star, Edit2, MoreVertical, X, Clock } from 'lucide-react';
 import ThinkingLoader from './ThinkingLoader';
 import StreamingMarkdown from './StreamingMarkdown';
-import './Dashboard.css';
-const API_URL = import.meta.env.VITE_API_URL || "https://agentic-ai-1-f6cz.onrender.com/";
+const API_URL = (import.meta.env.VITE_API_URL || "https://agentic-ai-1-f6cz.onrender.com/").replace(/\/$/, "");
 const Dashboard = ({ user, onLogout }) => {
   const [task, setTask] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
