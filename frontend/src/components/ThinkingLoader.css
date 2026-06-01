@@ -1,0 +1,151 @@
+.thinking-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(99, 102, 241, 0.2) !important;
+}
+
+.thinking-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+  animation: scanline 2s linear infinite;
+}
+
+.brain-loader-wrapper {
+  flex-shrink: 0;
+  padding: 0.25rem;
+}
+
+.brain-loader {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #6366f1, #1e293b);
+  box-shadow: 0 0 15px #6366f1;
+  animation: pulse 1.6s infinite ease-in-out;
+  position: relative;
+}
+
+.brain-loader::before,
+.brain-loader::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(99, 102, 241, 0.4);
+  width: 100%;
+  height: 100%;
+  top: -2px;
+  left: -2px;
+  animation: ripple 2.4s infinite;
+}
+
+.brain-loader::after {
+  animation-delay: 1.2s;
+}
+
+.thinking-content {
+  flex: 1;
+}
+
+.thinking-content h4 {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.thinking-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+/* Progress Steps */
+.progress-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  max-width: 350px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.step-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+}
+
+.step.active .step-dot {
+  background: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.step.active span {
+  color: var(--success-color);
+}
+
+.step.pulsing .step-dot {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
+  animation: pulse-dot 1s infinite alternate;
+}
+
+.step.pulsing span {
+  color: var(--text-primary);
+}
+
+.step.pending .step-dot {
+  background: transparent;
+}
+
+.step.pending span {
+  color: var(--text-secondary);
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 15px #6366f1; }
+  50% { transform: scale(1.1); box-shadow: 0 0 25px #818cf8; }
+  100% { transform: scale(1); box-shadow: 0 0 15px #6366f1; }
+}
+
+@keyframes ripple {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes scanline {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes pulse-dot {
+  0% { opacity: 0.6; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1.2); }
+}

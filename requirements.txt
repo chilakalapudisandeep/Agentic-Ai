@@ -1,0 +1,9 @@
+groq
+python-dotenv
+pymongo
+requests
+langchain
+fastapi
+certifi
+uvicorn
+pydantic
