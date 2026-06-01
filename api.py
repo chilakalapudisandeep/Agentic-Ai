@@ -15,6 +15,7 @@ import database as db
 
 app = FastAPI(title="Agentic AI System")
 @app.get("/")
+@app.head("/")
 def home():
     return {"message":"Backend is running"}
 
@@ -193,4 +194,5 @@ async def run_task(req: TaskRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
